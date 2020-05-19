@@ -11,12 +11,16 @@ import pyautogui
 
 #  ------------------------ Set up Stuff ------------------------ #
 def getUserAgent(ChromePath):  # Gets Computer's User-Agent
-    driver = webdriver.Chrome(executable_path=ChromePath)  # Path WILL change on other computers
-    driver.get("https://developers.whatismybrowser.com/useragents/parse/?analyse-my-user-agent=yes")
-    usragnt = driver.find_element_by_xpath("//*[@id=\"id_user_agent\"]").text
-    driver.quit()
-    return usragnt
-
+    try:
+        driver = webdriver.Chrome(executable_path=ChromePath)  # Path WILL change on other computers
+        driver.get("https://developers.whatismybrowser.com/useragents/parse/?analyse-my-user-agent=yes")
+        usragnt = driver.find_element_by_xpath("//*[@id=\"id_user_agent\"]").text
+        driver.quit()
+        return usragnt
+    except selenium.common.exceptions.WebDriverException as err:
+        print("Seems you don't have a chrome-driver, go to this link to download...\nhttps://chromedriver.chromium.org/")
+        quit()
+    
 
 def setup(head, UA, ChromePath):
     options = Options()
