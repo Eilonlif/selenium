@@ -1,2 +1,2 @@
 # selenium
-selenium stuff boi
+selenium stuff
